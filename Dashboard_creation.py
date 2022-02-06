@@ -109,7 +109,6 @@ if submit:
     probability = float(results['probability'])
     row1_space1, row1_1, row1_2, row1_space3, row1_3, row1_4, row1_space5  = \
     st.columns((0.15, 1.5, 1.0, 0.00000001,1.0, 1.5, 0.15))
-    st.markdown(prediction)
     if prediction == 0:
         with row1_2:
             st.markdown("<h2 style='text-align: center; color: black;'> \
