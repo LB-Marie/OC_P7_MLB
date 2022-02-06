@@ -54,7 +54,7 @@ def predict_score(data:Scoring_data):
     data = data.dict()
     values = np.array(list(data.values())).reshape(1, -1)
     prediction = int(classifier.predict(values))
-    probability = round(classifier.predict_proba(values)[0,prediction], 2)
+    probability = round(classifier.predict_proba(values)[0,1], 2)
     return {
         'prediction': str(prediction), 
         'probability' : str(probability) }
