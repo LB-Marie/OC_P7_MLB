@@ -6,6 +6,7 @@ from fastapi import FastAPI
 import pickle
 from pydantic import BaseModel
 import numpy as np
+import pandas as pd
 #
 ###############################################################################
 ##                           Creation of the app object                      ##
@@ -58,3 +59,16 @@ def predict_score(data:Scoring_data):
     return {
         'prediction': str(prediction), 
         'probability' : str(probability) }
+
+@app.post('/predict_client')
+def predict_score_from_client(level:int):
+    data = pd.read_csv('P7_client_selected_data.csv')
+    if level < len(data):
+        d = data.iloc[level].to_frame().transpose()
+        prediction = int(classifier.predict(d))
+        probability = round(classifier.predict_proba(d)[0,1], 2)
+        return {
+            'prediction': str(prediction), 
+            'probability' : str(probability) }
+    else:
+        return("This client is does not exist")
